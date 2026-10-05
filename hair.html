@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>머리하는 날 — 홈페이지 샘플</title>
+<meta name="description" content="인천 1인 미용실 소개 홈페이지 샘플">
+<style>
+:root{--bg:#F6F5F8;--ink:#1F1B2E;--sub:#5F5A73;--accent:#7A4FD6;--card:#fff;--line:#E3E0EC;--dark:#1F1B2E}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.notice{background:var(--dark);color:#F3E9DC;text-align:center;font-size:13px;padding:6px 16px}
+header{position:sticky;top:0;z-index:10;background:rgba(251,247,240,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:900;font-size:20px;letter-spacing:-.02em}.logo span{color:var(--accent)}
+nav a{margin-left:22px;font-size:15px;font-weight:600;color:var(--sub)}nav a:hover{color:var(--accent)}
+.hero{padding:84px 0 70px;background:radial-gradient(circle at 80% 20%,#E4D9FA 0,transparent 45%),radial-gradient(circle at 10% 90%,#ECE6F7 0,transparent 40%)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.kicker{display:inline-block;font-size:14px;font-weight:700;color:var(--accent);background:#ECE3FC;padding:5px 14px;border-radius:30px;margin-bottom:18px}
+.hero h1{font-size:46px;line-height:1.3;font-weight:900;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{margin:18px 0 28px;font-size:18px;color:var(--sub)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;font-weight:800;font-size:16px}
+.btn.main{background:var(--accent);color:#fff}.btn.line{border:2px solid var(--ink)}
+.hero-art{aspect-ratio:1/1;border-radius:28px;background:linear-gradient(145deg,#B79BF0,#5B34B5);position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(120,70,30,.25)}
+.bread{position:absolute;border-radius:50% 50% 45% 45%;background:radial-gradient(circle at 35% 30%,#EDE4FF,#C7B2F5 60%,#9474DE);box-shadow:inset -8px -10px 0 rgba(0,0,0,.08)}
+.bread::after{content:"";position:absolute;inset:18% 20%;border-top:4px dotted rgba(255,255,255,.75);border-radius:50%}
+.b1{width:46%;height:32%;left:10%;top:18%;transform:rotate(-12deg)}.b2{width:42%;height:30%;right:8%;top:40%;transform:rotate(10deg)}.b3{width:38%;height:27%;left:20%;bottom:10%;transform:rotate(-4deg)}
+.hero-art .label{position:absolute;right:16px;bottom:16px;background:#fff;color:var(--ink);font-weight:800;font-size:14px;padding:8px 14px;border-radius:30px}
+section{padding:80px 0}
+.sec-t{font-size:32px;font-weight:900;letter-spacing:-.02em;margin-bottom:10px}
+.sec-s{color:var(--sub);margin-bottom:36px}
+.about{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.about div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+.about b{display:block;font-size:30px;margin-bottom:6px}
+.about h3{font-size:19px;margin-bottom:6px}.about p{color:var(--sub);font-size:15px}
+.menu{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 40px}
+.item{display:flex;align-items:baseline;gap:10px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.item .n{font-weight:800;font-size:17px}.item .d{color:var(--sub);font-size:14px}
+.item .dots{flex:1}.item .p{font-weight:900;color:var(--accent);white-space:nowrap}
+.tag{font-size:11px;font-weight:800;color:#fff;background:var(--accent);padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ph{aspect-ratio:1/1;border-radius:16px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:800;font-size:14px}
+.ph1{background:linear-gradient(160deg,#9C82D9,#4B2F8F)}.ph2{background:linear-gradient(160deg,#A9B6C9,#4E5D75)}.ph3{background:linear-gradient(160deg,#D7B7D9,#8A5A8C)}.ph4{background:linear-gradient(160deg,#5F5A73,#1F1B2E)}
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+.box h3{font-size:19px;margin-bottom:14px}
+.hours li{list-style:none;display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:15px}
+.hours li span:last-child{font-weight:700}
+.map{border-radius:14px;height:200px;background:repeating-linear-gradient(0deg,#EFE6D8 0 2px,transparent 2px 40px),repeating-linear-gradient(90deg,#EFE6D8 0 2px,transparent 2px 40px),#F8F2E8;position:relative;margin-bottom:14px}
+.pin{position:absolute;left:50%;top:45%;transform:translate(-50%,-100%);font-size:34px}
+.form label{display:block;font-size:14px;font-weight:700;margin:12px 0 6px}
+.form input,.form select,.form textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#FFFDF9}
+.form textarea{height:90px;resize:vertical}
+.form button{margin-top:16px;width:100%;border:0;cursor:pointer}
+.ok{display:none;margin-top:12px;font-weight:700;color:#2E7D4F}
+footer{background:var(--dark);color:#D9CBB8;padding:40px 0 90px;font-size:14px}
+footer b{color:#fff}
+.float{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:20}
+.float a{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.f-kakao{background:#FEE500}.f-call{background:var(--accent);color:#fff}
+@media(max-width:760px){
+ nav{display:none}
+ .hero{padding:48px 0}.hero .wrap{grid-template-columns:1fr}.hero h1{font-size:34px}
+ .about,.menu-grid,.visit{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}
+ section{padding:56px 0}.sec-t{font-size:26px}
+}
+</style>
+</head>
+<body>
+<div class="notice">홈페이지 제작 샘플입니다 · 실제 매장이 아닙니다</div>
+<header><div class="wrap">
+ <a class="logo" href="#">머리하는 <span>날</span></a>
+ <nav><a href="#about">소개</a><a href="#menu">가격</a><a href="#gallery">사진</a><a href="#visit">오시는 길</a><a href="#ask">예약 문의</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+ <div>
+  <span class="kicker">100% 예약제 · 1인 디자이너</span>
+  <h1>한 사람만 보는<br><em>동네 1인 미용실</em></h1>
+  <p>처음부터 끝까지 원장 한 명이 해요.<br>기다리는 손님 없이 한 분씩만 받습니다.</p>
+  <div class="btns"><a class="btn main" href="#ask">예약 문의</a><a class="btn line" href="#menu">가격 보기</a></div>
+ </div>
+ <div class="hero-art"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:150px">✂️</div><div style="position:absolute;left:10%;top:12%;width:30%;height:30%;border-radius:50%;background:rgba(255,255,255,.18)"></div><div style="position:absolute;right:8%;bottom:20%;width:22%;height:22%;border-radius:50%;background:rgba(255,255,255,.14)"></div><span class="label">오늘 예약 3자리 남음</span></div>
+</div></section>
+
+<section id="about"><div class="wrap">
+ <h2 class="sec-t">이런 미용실이에요</h2><p class="sec-s">작은 가게라 한 분께 시간을 다 씁니다.</p>
+ <div class="about">
+  <div><b>✂️</b><h3>원장 혼자 끝까지</h3><p>상담부터 마무리까지 같은 사람이 해요. 중간에 손이 안 바뀌어요.</p></div>
+  <div><b>🕐</b><h3>대기 없는 예약제</h3><p>앞 손님과 시간이 안 겹치게 잡아요. 오시면 바로 앉으세요.</p></div>
+  <div><b>💬</b><h3>가격은 미리 말씀드려요</h3><p>시술 전에 최종 금액을 알려 드려요. 끝나고 놀랄 일 없어요.</p></div>
+ </div>
+</div></section>
+
+<section class="menu" id="menu"><div class="wrap">
+ <h2 class="sec-t">가격</h2><p class="sec-s">가격은 샘플용 예시입니다.</p>
+ <div class="menu-grid">
+  <div class="item"><span class="n">여자 커트<span class="tag">BEST</span></span><span class="dots"></span><span class="p">18,000원</span></div>
+  <div class="item"><span class="n">남자 커트</span><span class="dots"></span><span class="p">13,000원</span></div>
+  <div class="item"><span class="n">일반 펌</span><span class="d">기장 따라 추가</span><span class="dots"></span><span class="p">60,000원~</span></div>
+  <div class="item"><span class="n">뿌리 염색</span><span class="dots"></span><span class="p">40,000원~</span></div>
+  <div class="item"><span class="n">두피 클리닉</span><span class="dots"></span><span class="p">30,000원</span></div>
+  <div class="item"><span class="n">클리닉 + 커트</span><span class="d">세트</span><span class="dots"></span><span class="p">42,000원</span></div>
+ </div>
+</div></section>
+
+<section id="gallery"><div class="wrap">
+ <h2 class="sec-t">가게 사진</h2><p class="sec-s">실제 제작 때는 사장님 사진으로 바뀝니다.</p>
+ <div class="gallery"><div class="ph ph1">시술 의자</div><div class="ph ph2">샴푸실</div><div class="ph ph3">커트 전후</div><div class="ph ph4">대기 공간</div></div>
+</div></section>
+
+<section id="visit"><div class="wrap">
+ <h2 class="sec-t">오시는 길 · 영업시간</h2><p class="sec-s">인천 ○○동 (샘플 주소)</p>
+ <div class="visit">
+  <div class="box"><h3>지도</h3><div class="map"><span class="pin">📍</span></div><p style="color:var(--sub);font-size:15px">실제 제작 때는 네이버 지도가 들어가고, 누르면 길찾기로 바로 열려요.</p></div>
+  <div class="box"><h3>영업시간</h3><ul class="hours">
+   <li><span>화 ~ 금</span><span>10:00 – 20:00</span></li>
+   <li><span>토 · 일</span><span>10:00 – 18:00</span></li>
+   <li><span>월요일</span><span>쉬어요</span></li>
+   <li><span>마지막 예약</span><span>마감 1시간 전</span></li></ul></div>
+ </div>
+</div></section>
+
+<section id="ask" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap" style="max-width:640px">
+ <h2 class="sec-t">예약 문의</h2><p class="sec-s">남겨 주시면 사장님 휴대폰으로 바로 알림이 가요.</p>
+ <form class="form box" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.reset();">
+  <label>이름</label><input required placeholder="홍길동">
+  <label>연락처</label><input required placeholder="010-0000-0000">
+  <label>원하는 날짜</label><input type="date">
+  <label>시술</label><select><option>커트</option><option>펌</option><option>염색</option><option>클리닉</option><option>상담 먼저</option></select>
+  <label>남길 말</label><textarea placeholder="지금 머리 기장, 원하는 스타일 등"></textarea>
+  <button class="btn main" type="submit">문의 남기기</button>
+  <p class="ok">샘플 화면이라 실제로 보내지지는 않아요. 실제 제작 때는 문자·메일로 바로 와요.</p>
+ </form>
+</div></section>
+
+<footer><div class="wrap">
+ <b>머리하는 날</b> (샘플)<br>인천 ○○동 · 010-0000-0000<br>이 페이지는 홈페이지 제작 샘플이며 실제 매장 정보가 아닙니다.
+</div></footer>
+
+<div class="float"><a class="f-kakao" href="#ask" title="카카오톡 문의">💬</a><a class="f-call" href="#ask" title="전화">📞</a></div>
+</body>
+</html>
