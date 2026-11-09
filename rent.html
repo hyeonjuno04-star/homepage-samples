@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1층 코너 상가 임대 — 홈페이지 샘플</title>
+<meta name="description" content="동네 1층 상가 임대 홍보 페이지 샘플">
+<style>
+:root{--bg:#F7F8FA;--ink:#1D2433;--sub:#5B6475;--accent:#2F6FEB;--accent2:#E8F0FE;--card:#fff;--line:#E3E7EE;--dark:#1D2433;--hot:#E5484D}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard','Noto Sans KR','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.notice{background:var(--dark);color:#E6EAF2;text-align:center;font-size:13px;padding:6px 16px}
+header{position:sticky;top:0;z-index:10;background:rgba(247,248,250,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:900;font-size:19px;letter-spacing:-.02em}.logo span{color:var(--accent)}
+nav a{margin-left:22px;font-size:15px;font-weight:600;color:var(--sub)}nav a:hover{color:var(--accent)}
+.hero{padding:64px 0 56px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.kicker{display:inline-block;font-size:14px;font-weight:800;color:#fff;background:var(--hot);padding:5px 14px;border-radius:30px;margin-bottom:16px}
+.hero h1{font-size:42px;line-height:1.3;font-weight:900;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin:16px 0 22px;font-size:18px;color:var(--sub)}
+.price{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.price div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
+.price small{display:block;font-size:13px;color:var(--sub);font-weight:700}
+.price b{font-size:22px;font-weight:900}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;font-weight:800;font-size:16px;border:0;cursor:pointer}
+.btn.main{background:var(--accent);color:#fff}.btn.line{border:2px solid var(--ink);background:transparent}
+.hero-img{border-radius:24px;overflow:hidden;aspect-ratio:2/1;box-shadow:0 20px 50px rgba(30,50,90,.18);position:relative}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img .label{position:absolute;left:16px;bottom:16px;background:#fff;font-weight:800;font-size:14px;padding:8px 14px;border-radius:30px}
+section{padding:72px 0}
+.sec-t{font-size:30px;font-weight:900;letter-spacing:-.02em;margin-bottom:8px}
+.sec-s{color:var(--sub);margin-bottom:32px}
+.spec{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.spec div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.spec small{display:block;color:var(--sub);font-size:13px;font-weight:700;margin-bottom:4px}
+.spec b{font-size:20px}
+.white{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gallery figure{border-radius:16px;overflow:hidden;position:relative;aspect-ratio:1/1}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;color:#fff;font-weight:800;font-size:14px;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.fit img{border-radius:20px;aspect-ratio:2/1;width:100%;object-fit:cover}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.chips span{background:var(--accent2);color:var(--accent);font-weight:800;padding:8px 14px;border-radius:30px;font-size:15px}
+.fit li{list-style:none;padding:8px 0;border-bottom:1px dashed var(--line);color:var(--sub)}
+.fit li b{color:var(--ink)}
+.area{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.area div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.area .em{font-size:28px;margin-bottom:6px}
+.area h3{font-size:18px;margin-bottom:4px}.area p{color:var(--sub);font-size:15px}
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+.box h3{font-size:19px;margin-bottom:14px}
+.map{border-radius:14px;height:220px;background:repeating-linear-gradient(0deg,#E8ECF3 0 2px,transparent 2px 40px),repeating-linear-gradient(90deg,#E8ECF3 0 2px,transparent 2px 40px),#F4F6FA;position:relative;margin-bottom:14px}
+.pin{position:absolute;left:50%;top:45%;transform:translate(-50%,-100%);font-size:34px}
+.cond li{list-style:none;display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.cond li span:last-child{font-weight:800}
+.form label{display:block;font-size:14px;font-weight:700;margin:12px 0 6px}
+.form input,.form select,.form textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#FBFCFE}
+.form textarea{height:90px;resize:vertical}
+.form button{margin-top:16px;width:100%}
+.ok{display:none;margin-top:12px;font-weight:700;color:#2E7D4F}
+footer{background:var(--dark);color:#C9D0DC;padding:40px 0 90px;font-size:14px}
+footer b{color:#fff}
+.float{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:20}
+.float a{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.f-kakao{background:#FEE500}.f-call{background:var(--accent);color:#fff}
+@media(max-width:760px){
+ nav{display:none}
+ .hero{padding:36px 0}.hero .wrap,.fit,.visit{grid-template-columns:1fr}.hero h1{font-size:32px}
+ .spec{grid-template-columns:repeat(2,1fr)}.area{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}
+ section{padding:52px 0}.sec-t{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="notice">홈페이지 제작 샘플입니다 · 실제 매물이 아닙니다</div>
+<header><div class="wrap">
+ <a class="logo" href="#">○○동 <span>1층 코너 상가</span></a>
+ <nav><a href="#spec">매물 정보</a><a href="#photo">사진</a><a href="#fit">추천 업종</a><a href="#area">주변</a><a href="#ask">문의</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+ <div>
+  <span class="kicker">바로 입주 가능</span>
+  <h1>아파트 단지 앞<br><em>1층 코너 상가</em> 임대</h1>
+  <p class="lead">유리창이 두 면이라 밖에서 잘 보입니다.<br>먼저 보고 결정하세요. 방문 일정은 맞춰 드립니다.</p>
+  <div class="price">
+   <div><small>보증금</small><b>2,000만</b></div>
+   <div><small>월세</small><b>120만</b></div>
+   <div><small>권리금</small><b>없음</b></div>
+  </div>
+  <div class="btns"><a class="btn main" href="#ask">방문 예약하기</a><a class="btn line" href="#photo">사진 보기</a></div>
+ </div>
+ <div class="hero-img"><img src="img/rent-hero.jpg" alt="상가 외관 예시 사진"><span class="label">전용 33㎡ · 1층</span></div>
+</div></section>
+
+<section class="white" id="spec"><div class="wrap">
+ <h2 class="sec-t">매물 정보</h2><p class="sec-s">숫자는 샘플용 예시입니다. 실제 제작 때는 매물 내용으로 바뀝니다.</p>
+ <div class="spec">
+  <div><small>면적</small><b>전용 33㎡ (10평)</b></div>
+  <div><small>층</small><b>1층 코너</b></div>
+  <div><small>관리비</small><b>월 10만 원</b></div>
+  <div><small>입주</small><b>즉시 가능</b></div>
+  <div><small>전기</small><b>15kW</b></div>
+  <div><small>화장실</small><b>내부 1개</b></div>
+  <div><small>주차</small><b>건물 2대</b></div>
+  <div><small>용도</small><b>근린생활시설</b></div>
+ </div>
+</div></section>
+
+<section id="photo"><div class="wrap">
+ <h2 class="sec-t">사진</h2><p class="sec-s">예시 사진이에요. 실제 제작 때는 매물 사진으로 바뀝니다.</p>
+ <div class="gallery">
+  <figure><img src="img/rent-hero.jpg" alt=""><figcaption>외관</figcaption></figure>
+  <figure><img src="img/rent-1.jpg" alt=""><figcaption>내부</figcaption></figure>
+  <figure><img src="img/rent-2.jpg" alt=""><figcaption>앞 거리 (낮)</figcaption></figure>
+  <figure><img src="img/rent-3.jpg" alt=""><figcaption>앞 거리 (저녁)</figcaption></figure>
+ </div>
+</div></section>
+
+<section class="white" id="fit"><div class="wrap fit">
+ <img src="img/rent-4.jpg" alt="카페로 꾸민 예시">
+ <div>
+  <h2 class="sec-t">이런 가게에 잘 맞아요</h2>
+  <p class="sec-s" style="margin-bottom:0">위 사진은 같은 크기 공간을 카페로 꾸민 예시입니다.</p>
+  <div class="chips"><span>☕ 카페</span><span>🥐 베이커리</span><span>✂️ 미용실</span><span>📚 교습소</span><span>💅 네일숍</span></div>
+  <ul>
+   <li><b>유리창 두 면</b> — 지나가는 사람 눈에 바로 띕니다</li>
+   <li><b>아파트 단지 정문 앞</b> — 아침·저녁 오가는 길목</li>
+   <li><b>권리금 없음</b> — 시작 비용이 적게 듭니다</li>
+  </ul>
+ </div>
+</div></section>
+
+<section id="area"><div class="wrap">
+ <h2 class="sec-t">주변</h2><p class="sec-s">걸어서 갈 수 있는 거리 기준 (샘플 예시)</p>
+ <div class="area">
+  <div><p class="em">🏢</p><h3>아파트 1,200세대</h3><p>단지 정문까지 걸어서 1분</p></div>
+  <div><p class="em">🏫</p><h3>초등학교 · 학원가</h3><p>하교 시간 유동 인구가 많아요</p></div>
+  <div><p class="em">🚌</p><h3>버스 정류장</h3><p>바로 앞 정류장, 노선 4개</p></div>
+ </div>
+</div></section>
+
+<section class="white" id="visit"><div class="wrap">
+ <h2 class="sec-t">위치 · 계약 조건</h2><p class="sec-s">인천 ○○동 (샘플 주소)</p>
+ <div class="visit">
+  <div class="box"><h3>지도</h3><div class="map"><span class="pin">📍</span></div><p style="color:var(--sub);font-size:15px">실제 제작 때는 네이버 지도가 들어가고, 누르면 길찾기로 바로 열려요.</p></div>
+  <div class="box"><h3>계약 조건</h3><ul class="cond">
+   <li><span>보증금 / 월세</span><span>2,000만 / 120만</span></li>
+   <li><span>관리비</span><span>월 10만 원</span></li>
+   <li><span>계약 기간</span><span>2년 (협의)</span></li>
+   <li><span>렌트프리</span><span>1개월 (협의)</span></li>
+   <li><span>부가세</span><span>별도</span></li></ul></div>
+ </div>
+</div></section>
+
+<section id="ask"><div class="wrap" style="max-width:640px">
+ <h2 class="sec-t">방문 예약 · 문의</h2><p class="sec-s">남겨 주시면 담당자 휴대폰으로 바로 알림이 가요.</p>
+ <form class="form box" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.reset();">
+  <label>이름</label><input required placeholder="홍길동">
+  <label>연락처</label><input required placeholder="010-0000-0000">
+  <label>하실 업종</label><input placeholder="예: 카페, 미용실">
+  <label>보고 싶은 날</label><input type="date">
+  <label>남길 말</label><textarea placeholder="궁금한 점을 적어 주세요"></textarea>
+  <button class="btn main" type="submit">문의 남기기</button>
+  <p class="ok">샘플 화면이라 실제로 보내지지는 않아요. 실제 제작 때는 문자·메일로 바로 와요.</p>
+ </form>
+</div></section>
+
+<footer><div class="wrap">
+ <b>○○동 1층 코너 상가</b> (샘플)<br>인천 ○○동 · 010-0000-0000<br>이 페이지는 홈페이지 제작 샘플이며 실제 매물 정보가 아닙니다.
+</div></footer>
+
+<div class="float"><a class="f-kakao" href="#ask" title="카카오톡 문의">💬</a><a class="f-call" href="#ask" title="전화">📞</a></div>
+</body>
+</html>
