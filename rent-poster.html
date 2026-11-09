@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>임대 안내문 샘플 (A4)</title>
+<style>
+@page{size:A4 portrait;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Noto Sans KR','Malgun Gothic',sans-serif;background:#E9ECF1;color:#1D2433}
+.sheet{width:210mm;height:297mm;margin:12px auto;background:#fff;padding:16mm 15mm;display:flex;flex-direction:column;box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.notice{font-size:11pt;color:#8A93A3;text-align:center;margin-bottom:6mm}
+.top{background:#E5484D;color:#fff;text-align:center;border-radius:6mm;padding:9mm 0 8mm}
+.top b{display:block;font-size:66pt;font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.top span{font-size:20pt;font-weight:800}
+.money{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin:9mm 0 7mm}
+.money div{border:1.2mm solid #1D2433;border-radius:5mm;text-align:center;padding:6mm 0}
+.money small{display:block;font-size:17pt;font-weight:800;color:#5B6475}
+.money strong{font-size:44pt;font-weight:900;letter-spacing:-.02em}
+.facts{display:flex;justify-content:center;gap:4mm;flex-wrap:wrap;font-size:17pt;font-weight:800}
+.facts span{background:#EEF2F8;border-radius:30mm;padding:2.5mm 6mm}
+.free{margin:7mm auto 0;background:#FFE14D;color:#1D2433;font-size:24pt;font-weight:900;border-radius:4mm;padding:3mm 9mm;text-align:center}
+.qr{margin-top:auto;display:grid;grid-template-columns:62mm 1fr;gap:8mm;align-items:center;border-top:.6mm dashed #C9D0DC;padding-top:9mm}
+.qr img{width:62mm;height:62mm}
+.qr h2{font-size:25pt;font-weight:900;line-height:1.3;margin-bottom:3mm}
+.qr p{font-size:14pt;color:#5B6475;line-height:1.6}
+.call{margin-top:8mm;background:#1D2433;color:#fff;border-radius:5mm;text-align:center;padding:6mm 0;font-size:30pt;font-weight:900;letter-spacing:.02em}
+.call small{display:block;font-size:13pt;font-weight:600;color:#C9D0DC;letter-spacing:0}
+@media print{body{background:#fff}.sheet{margin:0;box-shadow:none}.notice{display:none}}
+@media(max-width:820px){.sheet{transform:scale(.45);transform-origin:top left;margin:8px}}
+</style>
+</head>
+<body>
+<div class="sheet">
+ <p class="notice">홈페이지 제작 샘플입니다 · 실제 매물이 아닙니다</p>
+ <div class="top"><span>건물주 직접</span><b>상가 임대</b></div>
+ <div class="money">
+  <div><small>보증금</small><strong>2,000만</strong></div>
+  <div><small>월세</small><strong>120만</strong></div>
+ </div>
+ <div class="facts"><span>1층 코너</span><span>10평</span><span>권리금 없음</span><span>즉시 입주</span></div>
+ <div class="free">주인 직접 · 중개수수료 없음</div>
+ <div class="qr">
+  <img src="img/rent-qr.png" alt="임대 홍보 페이지 QR 코드">
+  <div>
+   <h2>휴대폰 카메라로<br>찍어 보세요</h2>
+   <p>내부 사진 · 관리비 · 주변 정보<br>어울리는 업종 예시까지<br>밤에도 바로 보실 수 있어요</p>
+  </div>
+ </div>
+ <div class="call"><small>문의 (샘플 번호)</small>010-0000-0000</div>
+</div>
+</body>
+</html>
