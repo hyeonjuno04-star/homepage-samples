@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>우리 가게 홈페이지 미리보기</title>
+<meta name="description" content="가게 이름과 사진만 넣으면 우리 가게 홈페이지가 바로 보입니다. 프리쎈스">
+<meta property="og:title" content="우리 가게 홈페이지, 1분 만에 미리 보기">
+<meta property="og:description" content="가게 이름과 사진만 넣으면 바로 보입니다. 마음에 들면 그대로 만들어 드립니다.">
+<style>
+:root{--p:#5D4A8E;--p2:#7B66B0;--pa:#8A63C9;--pl:#F0EBF8;--ink:#1f1a2b;--mut:#6b6478;--line:#e4def0;--bg:#faf8fd}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-text-size-adjust:100%}
+.top{background:var(--p);color:#fff;padding:18px 16px 16px}
+.top h1{margin:0;font-size:20px;letter-spacing:-.3px}
+.top p{margin:4px 0 0;font-size:14px;opacity:.9}
+.wrap{max-width:1100px;margin:0 auto;padding:16px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.wrap>section{min-width:0}
+@media(min-width:900px){.wrap{grid-template-columns:420px 1fr;align-items:start}.pane-prev{position:sticky;top:16px}}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.step{font-size:12px;font-weight:700;color:var(--pa);letter-spacing:.5px;margin:0 0 6px}
+.card h2{font-size:17px;margin:0 0 12px}
+label{display:block;font-size:14px;font-weight:600;margin:12px 0 6px}
+label small{font-weight:400;color:var(--mut)}
+input[type=text],input[type=tel],textarea,select{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--p2);border-color:transparent}
+textarea{resize:vertical;min-height:96px}
+.kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kind{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 4px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink)}
+.kind b{display:block;font-size:22px;line-height:1.2}
+.kind.on{border-color:var(--p);background:var(--pl);color:var(--p);font-weight:700}
+.menu-row{display:grid;grid-template-columns:1fr 110px;gap:8px;margin-bottom:8px}
+.colors{display:flex;gap:10px;flex-wrap:wrap}
+.sw{width:40px;height:40px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.sw.on{box-shadow:0 0 0 3px var(--ink)}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ph{aspect-ratio:1;border:1.5px dashed #cfc5e3;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mut);cursor:pointer;background:#fcfbfe center/cover no-repeat;position:relative;text-align:center;padding:4px}
+.ph.has{border-style:solid;color:transparent}
+.ph .x{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#333;color:#fff;font-size:13px;line-height:22px;text-align:center;display:none}
+.ph.has .x{display:block}
+.hint{font-size:12px;color:var(--mut);margin:6px 0 0}
+.go{margin-top:4px}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:15px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none}
+.btn-p{background:var(--p);color:#fff}
+.btn-y{background:#FEE500;color:#191600}
+.btn-o{background:#fff;color:var(--p);border:1.5px solid var(--p)}
+.btn+.btn{margin-top:8px}
+.price{background:var(--pl);border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:12px}
+.price b{color:var(--p)}
+/* 미리보기 휴대폰 틀 */
+.phone{max-width:390px;margin:0 auto;border:10px solid #1d1a24;border-radius:38px;overflow:hidden;background:#fff;box-shadow:0 20px 50px rgba(60,40,100,.18)}
+.phone-bar{height:26px;background:#1d1a24;display:flex;justify-content:center;align-items:flex-end}
+.phone-bar i{width:90px;height:18px;background:#000;border-radius:0 0 12px 12px}
+.screen{height:680px;overflow-y:auto;overscroll-behavior:contain}
+.prev-label{text-align:center;font-size:13px;color:var(--mut);margin:0 0 10px}
+.mtoggle{position:fixed;left:16px;right:16px;bottom:14px;z-index:20;box-shadow:0 8px 24px rgba(60,40,100,.3)}
+@media(min-width:900px){.mtoggle{display:none}}
+@media(max-width:899px){.pane-prev{display:none}.show-prev .pane-prev{display:block}.show-prev .pane-form{display:none}.wrap{padding-bottom:90px}.screen{height:auto;max-height:none}}
+/* 가게 홈페이지(미리보기 안) */
+.s{--c:#5D4A8E;font-size:15px;color:#222}
+.s-nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee;position:sticky;top:0;background:rgba(255,255,255,.95);z-index:2}
+.s-nav b{font-size:16px;color:var(--c)}
+.s-nav span{font-size:12px;color:#888}
+.s-hero{height:300px;background:var(--c) center/cover no-repeat;position:relative;display:flex;align-items:flex-end}
+.s-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0) 60%)}
+.s-hero .emo{position:absolute;top:50%;left:50%;transform:translate(-50%,-70%);font-size:80px;opacity:.9}
+.s-hero-t{position:relative;z-index:1;color:#fff;padding:20px 18px}
+.s-hero-t small{display:inline-block;background:rgba(255,255,255,.22);padding:3px 10px;border-radius:20px;font-size:12px;margin-bottom:8px}
+.s-hero-t h3{margin:0;font-size:28px;line-height:1.25;word-break:keep-all}
+.s-hero-t p{margin:6px 0 0;font-size:15px;opacity:.95;word-break:keep-all}
+.s-cta{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 16px}
+.s-cta a{display:block;text-align:center;padding:12px;border-radius:10px;font-weight:700;text-decoration:none;font-size:15px}
+.s-cta .a1{background:var(--c);color:#fff}
+.s-cta .a2{border:1.5px solid var(--c);color:var(--c)}
+.s-sec{padding:20px 16px;border-top:8px solid #f5f5f7}
+.s-sec h4{margin:0 0 12px;font-size:17px}
+.s-sec h4:before{content:"";display:inline-block;width:4px;height:15px;background:var(--c);border-radius:2px;margin-right:8px;vertical-align:-2px}
+.s-intro{white-space:pre-line;color:#444;word-break:keep-all}
+.s-menu{list-style:none;margin:0;padding:0}
+.s-menu li{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px dashed #e5e5e5}
+.s-menu li span:last-child{font-weight:700;color:var(--c);white-space:nowrap}
+.s-gal{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.s-gal div{aspect-ratio:1;border-radius:10px;background:#f1eef6 center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:34px}
+.s-info{margin:0;display:grid;grid-template-columns:72px 1fr;gap:8px 10px;font-size:14px}
+.s-info dt{color:#888}
+.s-info dd{margin:0;word-break:keep-all}
+.s-map{margin-top:12px;height:120px;border-radius:10px;background:repeating-linear-gradient(45deg,#f1f1f4 0 10px,#e9e9ee 10px 20px);display:flex;align-items:center;justify-content:center;color:#888;font-size:13px}
+.s-foot{padding:18px 16px 26px;text-align:center;font-size:12px;color:#999;background:#fafafa}
+.s-water{position:sticky;bottom:0;background:var(--c);color:#fff;text-align:center;font-size:12px;padding:6px;opacity:.92}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:30;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>우리 가게 홈페이지, 1분 만에 미리 보기</h1>
+  <p>칸을 채우면 휴대폰 화면에 바로 나옵니다. 사진은 내 휴대폰 안에서만 쓰이고 어디에도 올라가지 않아요.</p>
+</header>
+
+<main class="wrap" id="wrap">
+  <section class="pane-form">
+    <div class="card">
+      <p class="step">1단계</p>
+      <h2>어떤 가게인가요?</h2>
+      <div class="kinds" id="kinds"></div>
+
+      <label for="f-name">가게 이름</label>
+      <input type="text" id="f-name" maxlength="30">
+
+      <label for="f-slogan">한 줄 소개 <small>(맨 위 큰 글씨 밑에 나와요)</small></label>
+      <input type="text" id="f-slogan" maxlength="40">
+
+      <label for="f-intro">가게 이야기 <small>(두세 줄이면 충분해요)</small></label>
+      <textarea id="f-intro" maxlength="300"></textarea>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <p class="step">2단계</p>
+      <h2>대표 메뉴·가격</h2>
+      <div id="menus"></div>
+      <p class="hint">비워 둔 줄은 홈페이지에 안 나와요.</p>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <p class="step">3단계</p>
+      <h2>사진 <small style="font-weight:400;color:var(--mut);font-size:13px">(없어도 돼요)</small></h2>
+      <div class="photos" id="photos"></div>
+      <p class="hint">첫 칸은 맨 위 큰 사진, 나머지는 사진 모음에 들어가요.</p>
+      <input type="file" id="file" accept="image/*" hidden>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <p class="step">4단계</p>
+      <h2>찾아오는 길·연락처</h2>
+      <label for="f-addr">주소</label>
+      <input type="text" id="f-addr" maxlength="60" placeholder="예) 인천 남동구 ○○로 12, 1층">
+      <label for="f-tel">전화번호</label>
+      <input type="tel" id="f-tel" maxlength="20" placeholder="예) 032-123-4567">
+      <label for="f-hours">영업시간</label>
+      <input type="text" id="f-hours" maxlength="40">
+      <label for="f-off">쉬는 날</label>
+      <input type="text" id="f-off" maxlength="30">
+
+      <label>색깔</label>
+      <div class="colors" id="colors"></div>
+    </div>
+
+    <div class="card go" style="margin-top:16px">
+      <div class="price">마음에 드시면 이 화면 <b>그대로 진짜 홈페이지</b>로 만들어 드려요.<br>
+        <b>1페이지 15만 원</b>부터 · 2일 안에 시안 · 첫 달 관리 무료</div>
+      <button class="btn btn-y" id="b-kakao">카카오톡으로 「이대로 만들어 주세요」</button>
+      <a class="btn btn-o" href="tel:01046825900">전화로 문의 010-4682-5900</a>
+      <p class="hint" style="text-align:center">카톡 버튼을 누르면 적으신 내용이 복사돼요. 채팅창에 붙여넣기만 하시면 됩니다.<br>사진은 채팅방에 따로 보내 주세요.</p>
+      <button class="btn" style="background:none;color:var(--mut);font-size:14px;font-weight:400;margin-top:4px" id="b-reset">처음부터 다시 쓰기</button>
+    </div>
+  </section>
+
+  <section class="pane-prev">
+    <p class="prev-label">↓ 손님 휴대폰에서 이렇게 보여요</p>
+    <div class="phone"><div class="phone-bar"><i></i></div><div class="screen" id="screen"></div></div>
+  </section>
+</main>
+
+<button class="btn btn-p mtoggle" id="b-toggle">내 홈페이지 미리 보기 →</button>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+var KINDS={
+ cafe:{n:"카페·빵집",e:"☕",name:"소금빵 굽는 집",slogan:"매일 아침 9시, 갓 구운 빵이 나와요",intro:"동네에서 10년째 빵을 굽고 있어요.\n버터는 국산 발효버터만 씁니다.\n창가 자리에서 천천히 쉬어 가세요.",menu:[["소금빵","3,500원"],["아메리카노","4,000원"],["바닐라 라떼","5,000원"]],hours:"매일 09:00 ~ 21:00",off:"매주 월요일",gal:["🥐","🍞","🧁","☕"],c:"#8B5E3C"},
+ hair:{n:"미용실",e:"✂️",name:"1인 예약제 미용실",slogan:"한 분만 모시고 끝까지 제가 합니다",intro:"예약하신 시간엔 손님 한 분만 모셔요.\n기다림 없이, 상담부터 마무리까지 원장이 직접 합니다.",menu:[["여성 커트","20,000원"],["펌","70,000원~"],["뿌리 염색","45,000원~"]],hours:"10:00 ~ 20:00 (예약제)",off:"매주 화요일",gal:["💇‍♀️","💈","🪮","🌿"],c:"#2F4858"},
+ academy:{n:"학원·교습소",e:"📚",name:"바른 수학 교습소",slogan:"아이 속도에 맞춰 개념부터 다시 잡아요",intro:"한 반 6명까지만 받아요.\n매달 성적표와 상담 메모를 부모님께 보내 드립니다.",menu:[["초등 수학 (주 3회)","월 22만 원"],["중등 수학 (주 3회)","월 28만 원"],["1:1 보충","회당 3만 원"]],hours:"평일 14:00 ~ 22:00",off:"일요일·공휴일",gal:["✏️","📐","📖","🧮"],c:"#1E5AA8"},
+ food:{n:"식당",e:"🍲",name:"엄마손 백반집",slogan:"매일 바뀌는 반찬 일곱 가지",intro:"새벽 시장에서 장 봐서 그날 다 씁니다.\n혼밥 손님 환영해요.",menu:[["오늘의 백반","9,000원"],["제육볶음","10,000원"],["김치찌개","9,000원"]],hours:"11:00 ~ 21:00 (브레이크 15~17시)",off:"매주 일요일",gal:["🍚","🥘","🥬","🍳"],c:"#B5432F"},
+ flower:{n:"꽃집",e:"💐",name:"오늘의 꽃",slogan:"전화 한 통이면 당일 꽃다발 준비해요",intro:"그날 들어온 꽃으로만 만들어요.\n기념일·개업 화분 배달도 해 드립니다.",menu:[["꽃다발 S","30,000원~"],["꽃다발 M","50,000원~"],["개업 화분","80,000원~"]],hours:"10:00 ~ 20:00",off:"연중무휴",gal:["🌷","🌹","🌻","🪴"],c:"#C2577A"},
+ beauty:{n:"네일·피부",e:"💅",name:"손끝 네일",slogan:"오래 가는 젤네일, 손 상하지 않게",intro:"제거할 때 손톱 상하지 않게 꼼꼼히 해요.\n1인 운영이라 예약 먼저 부탁드려요.",menu:[["젤 원컬러","35,000원"],["아트 추가","10,000원~"],["손 케어","20,000원"]],hours:"11:00 ~ 21:00 (예약제)",off:"매주 수요일",gal:["💅","✨","🌸","🤍"],c:"#5D4A8E"},
+ repair:{n:"수리·설치",e:"🔧",name:"우리동네 수리",slogan:"문 고장, 수전, 전등 — 오늘 가 드려요",intro:"작은 고장도 갑니다.\n가기 전에 사진 보고 견적부터 알려 드려요.",menu:[["출장비","20,000원"],["수전 교체","50,000원~"],["도어락 설치","80,000원~"]],hours:"08:00 ~ 19:00",off:"일요일",gal:["🔧","🚪","💡","🚰"],c:"#3E6B48"},
+ etc:{n:"기타",e:"🏪",name:"우리 가게",slogan:"동네에서 오래 함께할게요",intro:"가게 소개를 두세 줄 적어 주세요.",menu:[["대표 상품","10,000원"],["",""],["",""]],hours:"10:00 ~ 20:00",off:"매주 일요일",gal:["🏪","⭐","🛍️","😊"],c:"#5D4A8E"}
+};
+var COLORS=["#5D4A8E","#8B5E3C","#2F4858","#1E5AA8","#B5432F","#C2577A","#3E6B48","#222222"];
+var KEY="m2g-preview-v1";
+var st={kind:"cafe",color:null,photos:[null,null,null,null]};
+var $=function(id){return document.getElementById(id)};
+var F=["name","slogan","intro","addr","tel","hours","off"];
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function val(k){var v=$("f-"+k).value.trim();return v||$("f-"+k).placeholder.replace(/^예\) /,"")}
+function toast(t){var e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove("on")},2600)}
+
+// 업종 버튼
+Object.keys(KINDS).forEach(function(k){
+  var b=document.createElement("button");b.type="button";b.className="kind";b.dataset.k=k;
+  b.innerHTML="<b>"+KINDS[k].e+"</b>"+KINDS[k].n;
+  b.onclick=function(){setKind(k);render();save()};
+  $("kinds").appendChild(b);
+});
+// 메뉴 줄
+for(var i=0;i<4;i++){
+  var r=document.createElement("div");r.className="menu-row";
+  r.innerHTML='<input type="text" class="m-n" maxlength="24" aria-label="메뉴 이름"><input type="text" class="m-p" maxlength="14" aria-label="가격">';
+  $("menus").appendChild(r);
+}
+// 색깔
+COLORS.forEach(function(c){
+  var s=document.createElement("button");s.type="button";s.className="sw";s.style.background=c;s.dataset.c=c;s.setAttribute("aria-label","색 "+c);
+  s.onclick=function(){st.color=c;render();save()};
+  $("colors").appendChild(s);
+});
+// 사진 칸
+var curPh=0;
+st.photos.forEach(function(_,i){
+  var d=document.createElement("div");d.className="ph";d.dataset.i=i;
+  d.innerHTML=(i===0?"＋ 큰 사진":"＋ 사진")+'<span class="x" title="빼기">×</span>';
+  d.onclick=function(ev){
+    if(ev.target.classList.contains("x")){st.photos[i]=null;render();save();return}
+    curPh=i;$("file").value="";$("file").click();
+  };
+  $("photos").appendChild(d);
+});
+$("file").onchange=function(){
+  var f=this.files&&this.files[0];if(!f)return;
+  var rd=new FileReader();
+  rd.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var M=1000,w=img.width,h=img.height,sc=Math.min(1,M/Math.max(w,h));
+      var cv=document.createElement("canvas");cv.width=Math.round(w*sc);cv.height=Math.round(h*sc);
+      cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+      st.photos[curPh]=cv.toDataURL("image/jpeg",0.8);render();save();
+    };
+    img.onerror=function(){toast("이 사진은 열 수 없어요. 다른 사진을 골라 주세요.")};
+    img.src=rd.result;
+  };
+  rd.readAsDataURL(f);
+};
+
+function setKind(k){
+  var K=KINDS[k];st.kind=k;
+  $("f-name").placeholder="예) "+K.name;
+  $("f-slogan").placeholder="예) "+K.slogan;
+  $("f-intro").placeholder="예) "+K.intro;
+  $("f-hours").placeholder="예) "+K.hours;
+  $("f-off").placeholder="예) "+K.off;
+  document.querySelectorAll(".menu-row").forEach(function(r,i){
+    var m=K.menu[i]||["",""];
+    r.querySelector(".m-n").placeholder=m[0]?"예) "+m[0]:"메뉴 이름";
+    r.querySelector(".m-p").placeholder=m[1]?"예) "+m[1]:"가격";
+  });
+}
+
+function menus(){
+  var out=[],anyTyped=false;
+  document.querySelectorAll(".menu-row").forEach(function(r){
+    var n=r.querySelector(".m-n").value.trim(),p=r.querySelector(".m-p").value.trim();
+    if(n||p)anyTyped=true;
+    if(n)out.push([n,p]);
+  });
+  if(!anyTyped)return KINDS[st.kind].menu.filter(function(m){return m[0]});
+  return out;
+}
+
+function render(){
+  var K=KINDS[st.kind],c=st.color||K.c;
+  document.querySelectorAll(".kind").forEach(function(b){b.classList.toggle("on",b.dataset.k===st.kind)});
+  document.querySelectorAll(".sw").forEach(function(s){s.classList.toggle("on",s.dataset.c===c)});
+  document.querySelectorAll(".ph").forEach(function(d,i){
+    var p=st.photos[i];d.classList.toggle("has",!!p);d.style.backgroundImage=p?"url("+p+")":"";
+  });
+  var tel=$("f-tel").value.trim()||"032-123-4567";
+  var addr=val("addr")||"가게 주소";
+  var hero=st.photos[0];
+  var gal=[1,2,3].map(function(i,j){
+    var p=st.photos[i];
+    return p?'<div style="background-image:url('+p+')"></div>':'<div>'+K.gal[j+1]+'</div>';
+  });
+  gal.unshift(hero?'<div style="background-image:url('+hero+')"></div>':'<div>'+K.gal[0]+'</div>');
+  var ms=menus().map(function(m){return"<li><span>"+esc(m[0])+"</span><span>"+esc(m[1])+"</span></li>"}).join("");
+  var nm=esc(val("name"));
+  $("screen").innerHTML=
+   '<div class="s" style="--c:'+c+'">'+
+   '<div class="s-nav"><b>'+nm+'</b><span>'+esc(K.n)+'</span></div>'+
+   '<div class="s-hero" style="'+(hero?"background-image:url("+hero+")":"background:linear-gradient(135deg,"+c+","+c+"cc)")+'">'+
+     (hero?"":'<span class="emo">'+K.e+'</span>')+
+     '<div class="s-hero-t"><small>'+esc(addr.split(/[ ,]/).slice(0,2).join(" "))+'</small><h3>'+nm+'</h3><p>'+esc(val("slogan"))+'</p></div></div>'+
+   '<div class="s-cta"><a class="a1" href="tel:'+esc(tel.replace(/[^0-9]/g,""))+'">📞 전화하기</a><a class="a2" target="_blank" rel="noopener" href="https://map.naver.com/p/search/'+encodeURIComponent(addr)+'">📍 길찾기</a></div>'+
+   '<div class="s-sec"><h4>가게 이야기</h4><div class="s-intro">'+esc(val("intro"))+'</div></div>'+
+   (ms?'<div class="s-sec"><h4>메뉴·가격</h4><ul class="s-menu">'+ms+'</ul></div>':"")+
+   '<div class="s-sec"><h4>사진</h4><div class="s-gal">'+gal.join("")+'</div></div>'+
+   '<div class="s-sec"><h4>오시는 길</h4><dl class="s-info"><dt>주소</dt><dd>'+esc(addr)+'</dd><dt>전화</dt><dd>'+esc(tel)+'</dd><dt>영업시간</dt><dd>'+esc(val("hours"))+'</dd><dt>쉬는 날</dt><dd>'+esc(val("off"))+'</dd></dl><div class="s-map">지도가 여기에 들어가요</div></div>'+
+   '<div class="s-foot">© '+nm+'</div>'+
+   '<div class="s-water">미리보기 화면입니다 · 만든 곳 프리쎈스</div></div>';
+}
+
+function summary(){
+  var K=KINDS[st.kind],lines=["[홈페이지 제작 문의 — 미리보기 앱에서 보냄]",
+   "업종: "+K.n,"가게 이름: "+($("f-name").value.trim()||"(안 적음)"),
+   "한 줄 소개: "+($("f-slogan").value.trim()||"(안 적음)"),
+   "가게 이야기: "+($("f-intro").value.trim()||"(안 적음)")];
+  var ms=[];document.querySelectorAll(".menu-row").forEach(function(r){var n=r.querySelector(".m-n").value.trim(),p=r.querySelector(".m-p").value.trim();if(n)ms.push(n+(p?" "+p:""))});
+  lines.push("메뉴: "+(ms.join(" / ")||"(안 적음)"));
+  lines.push("주소: "+($("f-addr").value.trim()||"(안 적음)"));
+  lines.push("전화: "+($("f-tel").value.trim()||"(안 적음)"));
+  lines.push("영업시간: "+($("f-hours").value.trim()||"(안 적음)")+" / 쉬는 날: "+($("f-off").value.trim()||"(안 적음)"));
+  lines.push("색깔: "+(st.color||K.c));
+  var n=st.photos.filter(Boolean).length;lines.push("사진: "+n+"장 넣어 봄"+(n?" (채팅방에 따로 보낼게요)":""));
+  return lines.join("\n");
+}
+function copy(t){
+  if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t);
+  return new Promise(function(ok,no){var a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy")?ok():no()}catch(e){no(e)}a.remove()});
+}
+$("b-kakao").onclick=function(){
+  var t=summary(),url="https://pf.kakao.com/_mDcnX/chat";
+  var w=window.open("about:blank","_blank");
+  copy(t).then(function(){toast("내용이 복사됐어요. 카톡 채팅창에 붙여넣어 주세요.")},function(){toast("복사가 안 됐어요. 카톡에서 「미리보기 보고 연락드려요」라고 보내 주세요.")})
+   .then(function(){if(w)w.location=url;else location.href=url});
+};
+
+function save(){
+  try{
+    var d={kind:st.kind,color:st.color,f:{},m:[]};
+    F.forEach(function(k){d.f[k]=$("f-"+k).value});
+    document.querySelectorAll(".menu-row").forEach(function(r){d.m.push([r.querySelector(".m-n").value,r.querySelector(".m-p").value])});
+    localStorage.setItem(KEY,JSON.stringify(d));
+  }catch(e){}
+}
+function load(){
+  try{
+    var d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;
+    if(KINDS[d.kind])st.kind=d.kind;st.color=d.color||null;
+    F.forEach(function(k){if(d.f&&d.f[k]!=null)$("f-"+k).value=d.f[k]});
+    document.querySelectorAll(".menu-row").forEach(function(r,i){var m=d.m&&d.m[i];if(m){r.querySelector(".m-n").value=m[0]||"";r.querySelector(".m-p").value=m[1]||""}});
+  }catch(e){}
+}
+$("b-reset").onclick=function(){
+  if(!confirm("적은 내용을 모두 지울까요?"))return;
+  F.forEach(function(k){$("f-"+k).value=""});
+  document.querySelectorAll(".menu-row input").forEach(function(x){x.value=""});
+  st.color=null;st.photos=[null,null,null,null];
+  try{localStorage.removeItem(KEY)}catch(e){}
+  render();window.scrollTo(0,0);
+};
+document.querySelector(".pane-form").addEventListener("input",function(){render();save()});
+$("b-toggle").onclick=function(){
+  var on=$("wrap").classList.toggle("show-prev");
+  this.textContent=on?"← 다시 고치기":"내 홈페이지 미리 보기 →";
+  window.scrollTo(0,0);
+};
+
+load();setKind(st.kind);render();
+})();
+</script>
+</body>
+</html>
